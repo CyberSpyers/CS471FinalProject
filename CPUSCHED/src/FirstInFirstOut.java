@@ -18,7 +18,7 @@ class FirstInFirstOut {
    // Function to calculate turn around time
    static void findTurnAroundTime(int processes[], int n,
            int bt[], int wt[], int tat[]) {
-       // calculating turnaround time by adding
+       // calculating turn around time by adding
        // bt[i] + wt[i]
        for (int i = 0; i < n; i++) {
            tat[i] = bt[i] + wt[i];
@@ -61,7 +61,7 @@ class FirstInFirstOut {
    public static void main(String[] args) throws ParseException {
        //process id's
        int processes[] = {1, 2, 3};
-       int n = 10000;
+       int n = processes.length;
 
        //Burst time of all processes
        int burst_time[] = {10, 5, 8};
