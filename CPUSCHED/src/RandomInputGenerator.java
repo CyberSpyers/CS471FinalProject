@@ -1,5 +1,5 @@
 // Megan Spiers
-// Last Edited: 07/16/2020
+// Last Edited: 07/19/2020
 // For use with CS471Project Files
 
 
@@ -40,13 +40,13 @@ public class RandomInputGenerator {
         
         
         // Create helpful constants
-        int MAX_PROCESSES = 10000;
-        int MIN_ARRIVAL_TIME = 1;
-        int MAX_ARRIVAL_TIME = 100;
-        int MIN_PRIORITY = 1;
-        int MAX_PRIORITY = 10;
-        int MIN_CPU_BURST_UNITS = 2;
-        int MAX_CPU_BURST_UNITS = 30;
+        final int MAX_PROCESSES = 10000;
+        final int MIN_ARRIVAL_TIME = 1;
+        final int MAX_ARRIVAL_TIME = 100;
+        final int MIN_PRIORITY = 1;
+        final int MAX_PRIORITY = 10;
+        final int MIN_CPU_BURST_UNITS = 2;
+        final int MAX_CPU_BURST_UNITS = 30;
         
         // Populate the newFile, RandomInput.txt, with 10000 processes
         for (int processID = 1; processID <= MAX_PROCESSES; processID++) {
@@ -59,9 +59,9 @@ public class RandomInputGenerator {
         	
         	
         	// prints each line to the file
-        	System.out.println("<" + processID + ", "
-        			+ arrivalTime + ", " + priority + ", "
-        			+ CPUBurstUnits + ">");
+        	System.out.println(processID + " "
+        			+ arrivalTime + " " + priority + " "
+        			+ CPUBurstUnits);
         }
         
         
