@@ -1,18 +1,19 @@
 // Megan Spiers
-// Last Edited: 07/19/2020
+// Last Edited: 07/20/2020
 // Main File for CS471Project
 
 
 import java.util.Scanner;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 
 public class processScheduling {
 	
 	
 	
-	public static int displayMenu(){
+	public static int displayMenu(PrintWriter outputFile){
 		
         Scanner scnrInput = new Scanner(System.in);
         
@@ -34,7 +35,7 @@ public class processScheduling {
             	
                         case "1":
                         	
-                        	System.out.println("\nOption 1 Test\n");
+                        	outputFile.println("\nOption 1 Test\n");
                             break;
                             
                             
@@ -77,16 +78,18 @@ public class processScheduling {
 		
 		
 	    FileInputStream inputFile = new FileInputStream("RandomInput.txt");
+	    PrintWriter outputFile = new PrintWriter("StatisticsfortheRun.txt");
 
 	      
 	    Scanner scnr = new Scanner(inputFile);
 	    
 	    
-	    displayMenu();
+	    displayMenu(outputFile);
 	    
 	    
 	    scnr.close();
 	    inputFile.close();
+	    outputFile.close();
 	    
 	}
 
