@@ -1,0 +1,114 @@
+RESULTS LOG
+
+Order Selected: FIFO
+Statistics for the Run
+
+Number of Processes: 10000
+Total Elapsed Time (For the Scheduler): 400.0
+Throughput: 4.0
+CPU Utilization: 29.0%
+Average Waiting Time: 3.0
+Average Turnaround Time: 2.0
+Average Response Time: 1.0
+
+
+Order Selected: SJF W/O Preemption
+Statistics for the Run
+
+Number of Processes: 10000
+Total Elapsed Time (For the Scheduler): 500.0
+Throughput: 5.0
+CPU Utilization: 75.0%
+Average Waiting Time: 7.0
+Average Turnaround Time: 9.0
+Average Response Time: 2.0
+
+
+Order Selected: Priority W/ Preemption
+Statistics for the Run
+
+Number of Processes: 10000
+Total Elapsed Time (For the Scheduler): 783.0
+Throughput: 1.0
+CPU Utilization: 46.0%
+Average Waiting Time: 8.0
+Average Turnaround Time: 8.0
+Average Response Time: 5.0
+
+
+Order Selected: FIFO
+Statistics for the Run
+
+Number of Processes: 10000
+Total Elapsed Time (For the Scheduler): 400.0
+Throughput: 4.0
+CPU Utilization: 29.0%
+Average Waiting Time: 3.0
+Average Turnaround Time: 2.0
+Average Response Time: 1.0
+
+
+Order Selected: SJF W/O Preemption
+Statistics for the Run
+
+Number of Processes: 10000
+Total Elapsed Time (For the Scheduler): 500.0
+Throughput: 5.0
+CPU Utilization: 75.0%
+Average Waiting Time: 7.0
+Average Turnaround Time: 9.0
+Average Response Time: 2.0
+
+
+Order Selected: Priority W/ Preemption
+Statistics for the Run
+
+Number of Processes: 10000
+Total Elapsed Time (For the Scheduler): 783.0
+Throughput: 1.0
+CPU Utilization: 46.0%
+Average Waiting Time: 8.0
+Average Turnaround Time: 8.0
+Average Response Time: 5.0
+
+
+Order Selected: SJF W/O Preemption
+Statistics for the Run
+
+Number of Processes: 10000
+Total Elapsed Time (For the Scheduler): 500.0
+Throughput: 5.0
+CPU Utilization: 75.0%
+Average Waiting Time: 7.0
+Average Turnaround Time: 9.0
+Average Response Time: 2.0
+
+
+Order Selected: Priority W/ Preemption
+Statistics for the Run
+
+Number of Processes: 10000
+Total Elapsed Time (For the Scheduler): 783.0
+Throughput: 1.0
+CPU Utilization: 46.0%
+Average Waiting Time: 8.0
+Average Turnaround Time: 8.0
+Average Response Time: 5.0
+
+
+Order Selected: FIFO
+Statistics for the Run
+
+Number of Processes: 10000
+Total Elapsed Time (For the Scheduler): 400.0
+Throughput: 4.0
+CPU Utilization: 29.0%
+Average Waiting Time: 3.0
+Average Turnaround Time: 2.0
+Average Response Time: 1.0
+
+
+Order Selected: Sixty-Six
+
+Good Soldiers Follow Orders...
+Program Terminated
