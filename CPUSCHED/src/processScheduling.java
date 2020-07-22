@@ -12,18 +12,20 @@ import java.util.ArrayList;
 
 public class processScheduling {
 	
+	final static int numProcesses = 10000;
 	
-	
-	public void FIFO(FileInputStream inputFile, PrintWriter outputFile) {
+	public static void FIFO(FileInputStream inputFile, PrintWriter outputFile) {
 		
 		Scanner scnrInput = new Scanner(inputFile);
-		int[] processIDs = new int[10000];
-		int[] arrivalTimes = new int[10000];
-		int[] priorities = new int[10000];
-		int[] CPUBurstUnits = new int[10000];
+		int[] processIDs = new int[numProcesses];
+		int[] arrivalTimes = new int[numProcesses];
+		int[] priorities = new int[numProcesses];
+		int[] CPUBurstUnits = new int[numProcesses];
+		
+		int throughput = 0;
 		
 		
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < numProcesses; i++) {
 			processIDs[i] = scnrInput.nextInt();
 			arrivalTimes[i] = scnrInput.nextInt();
 			priorities[i] = scnrInput.nextInt();
@@ -36,7 +38,30 @@ public class processScheduling {
 		
 		
 		
-		
+		int service_time[] = new int[numProcesses];  
+		service_time[0] = 0;  
+		int waitTimes[] = new int[numProcesses];  
+		waitTimes[0] = 0;
+		int turnAroundTimes[] = new int[numProcesses];
+		turnAroundTimes[0] = 0;
+		  
+		    // calculating waiting time  
+		    for (int i = 1; i < numProcesses ; i++)  
+		    {  
+		        // Add burst time of previous processes  
+		        service_time[i] = service_time[i-1] + CPUBurstUnits[i-1];  
+		  
+		        // Find waiting time for current process =  
+		        // sum - at[i]  
+		        waitTimes[i] = service_time[i] - arrivalTimes[i];  
+		  
+		        // If waiting time for a process is in negative  
+		        // that means it is already in the ready queue  
+		        // before CPU becomes idle so its waiting time is 0  
+		        if (waitTimes[i] < 0)  
+		            waitTimes[i] = 0;  
+		    }  
+	
 		
 		
 		
@@ -56,13 +81,17 @@ public class processScheduling {
 		long endElapsedTime = System.currentTimeMillis();
 		float totalElapsedTime = (endElapsedTime - startElapsedTime);
 		
-		
+		int sum = 0;
+		for (int i = 0; i <= numProcesses; i++) {
+			sum = sum + CPUBurstUnits[i];
+		}
+		throughput = sum / numProcesses;
 	/////////////////////////////////////////////////////////////////////////////////////////	
 		
 		outputFile.println("\nOrder Selected: FIFO");
 		outputFile.println("Statistics for the Run\n");
 		
-		outputFile.println("Number of Processes: 10000");
+		outputFile.println("Number of Processes: " + numProcesses);
 		outputFile.println("Total Elapsed Time (For the Scheduler): " + totalElapsedTime);
 		outputFile.println("Throughput: " + throughput);
 		outputFile.println("CPU Utilization: " + CPUutilization + "%");
@@ -74,7 +103,7 @@ public class processScheduling {
 		System.out.println("\nOrder Selected: FIFO");
 		System.out.println("Statistics for the Run\n");
 		
-		System.out.println("Number of Processes: 10000");
+		System.out.println("Number of Processes: " + numProcesses);
 		System.out.println("Total Elapsed Time (For the Scheduler): " + totalElapsedTime);
 		System.out.println("Throughput: " + throughput);
 		System.out.println("CPU Utilization: " + CPUutilization + "%");
@@ -119,7 +148,7 @@ public class processScheduling {
                         case "1":
                         	
                         	
-                        	
+                        	FIFO(inputFile, outputFile);
                             break;
                             
                             
