@@ -1,129 +1,299 @@
 // Megan Spiers
-// Last Edited: 07/21/2020
+// Last Edited: 07/22/2020
 // Main File for CS471Project
 
 
 import java.util.Scanner;
+
+
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.lang.management.ManagementFactory;
+import javax.management.Attribute;
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+
 
 
 public class processScheduling {
 	
 	final static int numProcesses = 10000;
+	static int[] processIDs = new int[numProcesses];
+	static int[] arrivalTimes = new int[numProcesses];
+	static int[] priorities = new int[numProcesses];
+	static int[] CPUBurstUnits = new int[numProcesses];
 	
-	public static void FIFO(FileInputStream inputFile, PrintWriter outputFile) {
-		
+	
+	public static void readFile(FileInputStream inputFile) {
 		Scanner scnrInput = new Scanner(inputFile);
-		int[] processIDs = new int[numProcesses];
-		int[] arrivalTimes = new int[numProcesses];
-		int[] priorities = new int[numProcesses];
-		int[] CPUBurstUnits = new int[numProcesses];
-		
-		int throughput = 0;
-		
-		
+
 		for (int i = 0; i < numProcesses; i++) {
 			processIDs[i] = scnrInput.nextInt();
 			arrivalTimes[i] = scnrInput.nextInt();
 			priorities[i] = scnrInput.nextInt();
 			CPUBurstUnits[i] = scnrInput.nextInt();
+		
 		}
-		
-	/////////////////////////////////////////////////////////////////////////////////////////
-		
-		long startElapsedTime = System.currentTimeMillis();
-		
-		
-		
-		int service_time[] = new int[numProcesses];  
-		service_time[0] = 0;  
-		int waitTimes[] = new int[numProcesses];  
-		waitTimes[0] = 0;
-		int turnAroundTimes[] = new int[numProcesses];
-		turnAroundTimes[0] = 0;
-		  
-		    // calculating waiting time  
-		    for (int i = 1; i < numProcesses ; i++)  
-		    {  
-		        // Add burst time of previous processes  
-		        service_time[i] = service_time[i-1] + CPUBurstUnits[i-1];  
-		  
-		        // Find waiting time for current process =  
-		        // sum - at[i]  
-		        waitTimes[i] = service_time[i] - arrivalTimes[i];  
-		  
-		        // If waiting time for a process is in negative  
-		        // that means it is already in the ready queue  
-		        // before CPU becomes idle so its waiting time is 0  
-		        if (waitTimes[i] < 0)  
-		            waitTimes[i] = 0;  
-		    }  
+		scnrInput.close();
+	}
 	
+	
+	public static double getCPUUtilization() throws Exception {
+		   MBeanServer server = ManagementFactory.getPlatformMBeanServer();
+
+		   ObjectName objectName = ObjectName.getInstance("java.lang:type=OperatingSystem");
+		   javax.management.AttributeList list = server.getAttributes(objectName, new String[]{ "ProcessCpuLoad" });
+		   if (list.isEmpty()) { 
+			   return Double.NaN; 
+		   }
 		
+		   Attribute att = (Attribute) list.get(0);
+		   Double value = (Double) att.getValue();
+		  
+		   if (value == -1.0) { 
+			   return Double.NaN; 
+		   }
+		   
+		  
+		   return ((int) (value * 1000) / 10.0);
+	}
+	
+	
+	public static void FIFO(PrintWriter outputFile) throws Exception {
 		
+		// declare necessary variables
+		long startElapsedTime = System.currentTimeMillis();
+		int waitTimes[] = new int[numProcesses];  
+		int turnaroundTimes[] = new int[numProcesses];
+		int responseTimes[] = new int[numProcesses];
+		int sumWaitTimes = 0;
+	    int sumTurnaroundTimes = 0;
+	    int sumCPUBurstUnits = 0;
+	    int sumResponseTimes = 0;
+		int tempBurstTotal = 0;
+		double CPUutilization;
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		long endElapsedTime = System.currentTimeMillis();
-		float totalElapsedTime = (endElapsedTime - startElapsedTime);
-		
-		int sum = 0;
-		for (int i = 0; i <= numProcesses; i++) {
-			sum = sum + CPUBurstUnits[i];
+
+		for (int i = 1; i < numProcesses; i++) {
+			tempBurstTotal = tempBurstTotal + CPUBurstUnits[i-1];
+		    	
+		    // Calculate wait time
+		    waitTimes[i] = tempBurstTotal - arrivalTimes[i];  
+		    	
+		    // Calculate turnaround time
+		    turnaroundTimes[i] = CPUBurstUnits[i] + waitTimes[i];
+		    	
+		    // Calculate response time
+		    responseTimes[i] = tempBurstTotal - arrivalTimes[i];
+		    
+		    // Calculate sum for burst units, wait times, turnaround times, and response times
+		    sumCPUBurstUnits = sumCPUBurstUnits + CPUBurstUnits[i];
+		    sumWaitTimes = sumWaitTimes + waitTimes[i];  
+		    sumTurnaroundTimes = sumTurnaroundTimes + turnaroundTimes[i]; 
+		    sumResponseTimes = sumResponseTimes + responseTimes[i];
 		}
-		throughput = sum / numProcesses;
-	/////////////////////////////////////////////////////////////////////////////////////////	
+		    
+		// Calculate statistics to be printed   
+		float throughput = sumCPUBurstUnits / numProcesses;
+		float averageWaitTime = sumWaitTimes / numProcesses;
+		float averageTurnaroundTime = sumTurnaroundTimes / numProcesses;
+		float averageResponseTime = sumResponseTimes / numProcesses;
+
 		
+		// Calculate elapsed time
+		Thread.sleep(1);
+		long endElapsedTime = System.currentTimeMillis();
+		double totalElapsedTime = (endElapsedTime - startElapsedTime) - 1;
+		
+		
+		// Calculate CPU utilization
+		CPUutilization = getCPUUtilization();
+		
+		// Print statistics to console
 		outputFile.println("\nOrder Selected: FIFO");
 		outputFile.println("Statistics for the Run\n");
 		
 		outputFile.println("Number of Processes: " + numProcesses);
-		outputFile.println("Total Elapsed Time (For the Scheduler): " + totalElapsedTime);
+		outputFile.println("Total Elapsed Time (For the Scheduler): " + totalElapsedTime + "ms");
 		outputFile.println("Throughput: " + throughput);
 		outputFile.println("CPU Utilization: " + CPUutilization + "%");
 		outputFile.println("Average Waiting Time: " + averageWaitTime);
 		outputFile.println("Average Turnaround Time: " + averageTurnaroundTime);
 		outputFile.println("Average Response Time: " + averageResponseTime + "\n");
 		
-		
+		// Print statistics to ResultsLog.txt
 		System.out.println("\nOrder Selected: FIFO");
 		System.out.println("Statistics for the Run\n");
 		
 		System.out.println("Number of Processes: " + numProcesses);
-		System.out.println("Total Elapsed Time (For the Scheduler): " + totalElapsedTime);
+		System.out.println("Total Elapsed Time (For the Scheduler): " + (endElapsedTime - startElapsedTime) + "ms");
 		System.out.println("Throughput: " + throughput);
 		System.out.println("CPU Utilization: " + CPUutilization + "%");
 		System.out.println("Average Waiting Time: " + averageWaitTime);
 		System.out.println("Average Turnaround Time: " + averageTurnaroundTime);
 		System.out.println("Average Response Time: " + averageResponseTime + "\n");
-			
-	//////////////////////////////////////////////////////////////////////////////////////////	
-		scnrInput.close();
+
 	}
 	
 	
+public static void SJFWOPreemption(PrintWriter outputFile) throws Exception {
+		
+		// declare necessary variables
+		long startElapsedTime = System.currentTimeMillis();
+		int waitTimes[] = new int[numProcesses];  
+		int turnaroundTimes[] = new int[numProcesses];
+		int responseTimes[] = new int[numProcesses];
+		int sumWaitTimes = 0;
+	    int sumTurnaroundTimes = 0;
+	    int sumCPUBurstUnits = 0;
+	    int sumResponseTimes = 0;
+		int tempBurstTotal = 0;
+		double CPUutilization;
+		
+
+		for (int i = 1; i < numProcesses; i++) {
+			tempBurstTotal = tempBurstTotal + CPUBurstUnits[i-1];
+		    	
+		    // Calculate wait time
+		    waitTimes[i] = tempBurstTotal - arrivalTimes[i];  
+		    	
+		    // Calculate turnaround time
+		    turnaroundTimes[i] = CPUBurstUnits[i] + waitTimes[i];
+		    	
+		    // Calculate response time
+		    responseTimes[i] = tempBurstTotal - arrivalTimes[i];
+		    
+		    // Calculate sum for burst units, wait times, turnaround times, and response times
+		    sumCPUBurstUnits = sumCPUBurstUnits + CPUBurstUnits[i];
+		    sumWaitTimes = sumWaitTimes + waitTimes[i];  
+		    sumTurnaroundTimes = sumTurnaroundTimes + turnaroundTimes[i]; 
+		    sumResponseTimes = sumResponseTimes + responseTimes[i];
+		}
+		    
+		// Calculate statistics to be printed   
+		float throughput = sumCPUBurstUnits / numProcesses;
+		float averageWaitTime = sumWaitTimes / numProcesses;
+		float averageTurnaroundTime = sumTurnaroundTimes / numProcesses;
+		float averageResponseTime = sumResponseTimes / numProcesses;
+
+		
+		// Calculate elapsed time
+		Thread.sleep(1);
+		long endElapsedTime = System.currentTimeMillis();
+		double totalElapsedTime = (endElapsedTime - startElapsedTime) - 1;
+		
+		
+		// Calculate CPU utilization
+		CPUutilization = getCPUUtilization();
+		
+		// Print statistics to console
+		outputFile.println("\nOrder Selected: SJF W/O Preemption");
+		outputFile.println("Statistics for the Run\n");
+		
+		outputFile.println("Number of Processes: " + numProcesses);
+		outputFile.println("Total Elapsed Time (For the Scheduler): " + totalElapsedTime + "ms");
+		outputFile.println("Throughput: " + throughput);
+		outputFile.println("CPU Utilization: " + CPUutilization + "%");
+		outputFile.println("Average Waiting Time: " + averageWaitTime);
+		outputFile.println("Average Turnaround Time: " + averageTurnaroundTime);
+		outputFile.println("Average Response Time: " + averageResponseTime + "\n");
+		
+		// Print statistics to ResultsLog.txt
+		System.out.println("\nOrder Selected: SJF W/O Preemption");
+		System.out.println("Statistics for the Run\n");
+		
+		System.out.println("Number of Processes: " + numProcesses);
+		System.out.println("Total Elapsed Time (For the Scheduler): " + (endElapsedTime - startElapsedTime) + "ms");
+		System.out.println("Throughput: " + throughput);
+		System.out.println("CPU Utilization: " + CPUutilization + "%");
+		System.out.println("Average Waiting Time: " + averageWaitTime);
+		System.out.println("Average Turnaround Time: " + averageTurnaroundTime);
+		System.out.println("Average Response Time: " + averageResponseTime + "\n");
+
+	}
 	
 	
+public static void priorityWPreemption(PrintWriter outputFile) throws Exception {
+	
+	// declare necessary variables
+	long startElapsedTime = System.currentTimeMillis();
+	int waitTimes[] = new int[numProcesses];  
+	int turnaroundTimes[] = new int[numProcesses];
+	int responseTimes[] = new int[numProcesses];
+	int sumWaitTimes = 0;
+    int sumTurnaroundTimes = 0;
+    int sumCPUBurstUnits = 0;
+    int sumResponseTimes = 0;
+	int tempBurstTotal = 0;
+	double CPUutilization;
+	
+
+	for (int i = 1; i < numProcesses; i++) {
+		tempBurstTotal = tempBurstTotal + CPUBurstUnits[i-1];
+	    	
+	    // Calculate wait time
+	    waitTimes[i] = tempBurstTotal - arrivalTimes[i];  
+	    	
+	    // Calculate turnaround time
+	    turnaroundTimes[i] = CPUBurstUnits[i] + waitTimes[i];
+	    	
+	    // Calculate response time
+	    responseTimes[i] = tempBurstTotal - arrivalTimes[i];
+	    
+	    // Calculate sum for burst units, wait times, turnaround times, and response times
+	    sumCPUBurstUnits = sumCPUBurstUnits + CPUBurstUnits[i];
+	    sumWaitTimes = sumWaitTimes + waitTimes[i];  
+	    sumTurnaroundTimes = sumTurnaroundTimes + turnaroundTimes[i]; 
+	    sumResponseTimes = sumResponseTimes + responseTimes[i];
+	}
+	    
+	// Calculate statistics to be printed   
+	float throughput = sumCPUBurstUnits / numProcesses;
+	float averageWaitTime = sumWaitTimes / numProcesses;
+	float averageTurnaroundTime = sumTurnaroundTimes / numProcesses;
+	float averageResponseTime = sumResponseTimes / numProcesses;
+
+	
+	// Calculate elapsed time
+	Thread.sleep(1);
+	long endElapsedTime = System.currentTimeMillis();
+	double totalElapsedTime = (endElapsedTime - startElapsedTime) - 1;
 	
 	
+	// Calculate CPU utilization
+	CPUutilization = getCPUUtilization();
 	
-	public static void displayMenu(FileInputStream inputFile, PrintWriter outputFile){
+	// Print statistics to console
+	outputFile.println("\nOrder Selected: Priority W/ Preemption");
+	outputFile.println("Statistics for the Run\n");
+	
+	outputFile.println("Number of Processes: " + numProcesses);
+	outputFile.println("Total Elapsed Time (For the Scheduler): " + totalElapsedTime + "ms");
+	outputFile.println("Throughput: " + throughput);
+	outputFile.println("CPU Utilization: " + CPUutilization + "%");
+	outputFile.println("Average Waiting Time: " + averageWaitTime);
+	outputFile.println("Average Turnaround Time: " + averageTurnaroundTime);
+	outputFile.println("Average Response Time: " + averageResponseTime + "\n");
+	
+	// Print statistics to ResultsLog.txt
+	System.out.println("\nOrder Selected: Priority W/ Preemption");
+	System.out.println("Statistics for the Run\n");
+	
+	System.out.println("Number of Processes: " + numProcesses);
+	System.out.println("Total Elapsed Time (For the Scheduler): " + (endElapsedTime - startElapsedTime) + "ms");
+	System.out.println("Throughput: " + throughput);
+	System.out.println("CPU Utilization: " + CPUutilization + "%");
+	System.out.println("Average Waiting Time: " + averageWaitTime);
+	System.out.println("Average Turnaround Time: " + averageTurnaroundTime);
+	System.out.println("Average Response Time: " + averageResponseTime + "\n");
+
+}
+	
+	
+	public static void displayMenu(FileInputStream inputFile, PrintWriter outputFile) throws Exception{
 		
         Scanner scnrInput = new Scanner(System.in);
+        readFile(inputFile);
         
         
         System.out.println("Initial Note: Results Are Also Logged in the ResultsLog.txt File\n");
@@ -147,27 +317,25 @@ public class processScheduling {
             	
                         case "1":
                         	
-                        	
-                        	FIFO(inputFile, outputFile);
+                        	FIFO(outputFile);
                             break;
                             
                             
                         case "2":
                         	
-                        	
-                        	
+                        	SJFWOPreemption(outputFile);
                             break;
                             
                             
                         case "3":
                         	
-                        	
-                        	
+                        	priorityWPreemption(outputFile);
                         	break;
                         	
                         	
                         case "4":
                         	
+                        	// Star Wars Pun
                         	System.out.println("\nOrder Selected: Sixty-Six");
                         	System.out.println("\nGood Soldiers Follow Orders...");
                         	System.out.println("Program Terminated, Results Logged");
@@ -193,16 +361,8 @@ public class processScheduling {
         
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public static void main(String[] args) throws IOException {
+
+	public static void main(String[] args) throws Exception {
 		
 		
 	    FileInputStream inputFile = new FileInputStream("RandomInput.txt");
