@@ -19,9 +19,9 @@ public class processScheduling {
 	
 	final static int numProcesses = 10000;
 	static int[] processIDs = new int[numProcesses];
-	static int[] arrivalTimes = new int[numProcesses];
-	static int[] priorities = new int[numProcesses];
-	static int[] CPUBurstUnits = new int[numProcesses];
+	static double[] arrivalTimes = new double[numProcesses];
+	static double[] priorities = new double[numProcesses];
+	static double[] CPUBurstUnits = new double[numProcesses];
 	
 	
 	public static void readFile(FileInputStream inputFile) {
@@ -55,7 +55,7 @@ public class processScheduling {
 		   }
 		   
 		  
-		   return ((int) (value * 1000) / 10.0);
+		   return ( (value * 1000) / 10.0);
 	}
 	
 	
@@ -63,14 +63,15 @@ public class processScheduling {
 		
 		// declare necessary variables
 		long startElapsedTime = System.currentTimeMillis();
-		int waitTimes[] = new int[numProcesses];  
-		int turnaroundTimes[] = new int[numProcesses];
-		int responseTimes[] = new int[numProcesses];
-		int sumWaitTimes = 0;
-	    int sumTurnaroundTimes = 0;
-	    int sumCPUBurstUnits = 0;
-	    int sumResponseTimes = 0;
-		int tempBurstTotal = 0;
+		double waitTimes[] = new double[numProcesses];  
+		waitTimes[0] = 0;
+		double turnaroundTimes[] = new double[numProcesses];
+		double responseTimes[] = new double[numProcesses];
+		double sumWaitTimes = 0;
+		double sumTurnaroundTimes = 0;
+		double sumCPUBurstUnits = 0;
+		double sumResponseTimes = 0;
+		double tempBurstTotal = 0;
 		double CPUutilization;
 		
 
@@ -78,7 +79,7 @@ public class processScheduling {
 			tempBurstTotal = tempBurstTotal + CPUBurstUnits[i-1];
 		    	
 		    // Calculate wait time
-		    waitTimes[i] = tempBurstTotal - arrivalTimes[i];  
+		    waitTimes[i] = CPUBurstUnits[i - 1] + waitTimes[i - 1];  
 		    	
 		    // Calculate turnaround time
 		    turnaroundTimes[i] = CPUBurstUnits[i] + waitTimes[i];
@@ -94,10 +95,10 @@ public class processScheduling {
 		}
 		    
 		// Calculate statistics to be printed   
-		float throughput = sumCPUBurstUnits / numProcesses;
-		float averageWaitTime = sumWaitTimes / numProcesses;
-		float averageTurnaroundTime = sumTurnaroundTimes / numProcesses;
-		float averageResponseTime = sumResponseTimes / numProcesses;
+		double throughput = sumCPUBurstUnits / numProcesses;
+		double averageWaitTime = sumWaitTimes / numProcesses;
+		double averageTurnaroundTime = sumTurnaroundTimes / numProcesses;
+		double averageResponseTime = sumResponseTimes / numProcesses;
 
 		
 		// Calculate elapsed time
@@ -109,45 +110,46 @@ public class processScheduling {
 		// Calculate CPU utilization
 		CPUutilization = getCPUUtilization();
 		
-		// Print statistics to console
+		// Print statistics to ResultsLog.txt
 		outputFile.println("\nOrder Selected: FIFO");
 		outputFile.println("Statistics for the Run\n");
 		
 		outputFile.println("Number of Processes: " + numProcesses);
 		outputFile.println("Total Elapsed Time (For the Scheduler): " + totalElapsedTime + "ms");
-		outputFile.println("Throughput: " + throughput);
-		outputFile.println("CPU Utilization: " + CPUutilization + "%");
-		outputFile.println("Average Waiting Time: " + averageWaitTime);
-		outputFile.println("Average Turnaround Time: " + averageTurnaroundTime);
-		outputFile.println("Average Response Time: " + averageResponseTime + "\n");
+		outputFile.printf("Throughput: %.2f%n", throughput);
+		outputFile.printf("CPU Utilization: %.2f%%\n", CPUutilization);
+		outputFile.printf("Average Waiting Time: %.2f\n", averageWaitTime);
+		outputFile.printf("Average Turnaround Time: %.2f\n", averageTurnaroundTime);
+		outputFile.printf("Average Response Time: %.2f\n\n", averageResponseTime);
 		
-		// Print statistics to ResultsLog.txt
+		// Print statistics to console
 		System.out.println("\nOrder Selected: FIFO");
 		System.out.println("Statistics for the Run\n");
 		
 		System.out.println("Number of Processes: " + numProcesses);
-		System.out.println("Total Elapsed Time (For the Scheduler): " + (endElapsedTime - startElapsedTime) + "ms");
-		System.out.println("Throughput: " + throughput);
-		System.out.println("CPU Utilization: " + CPUutilization + "%");
-		System.out.println("Average Waiting Time: " + averageWaitTime);
-		System.out.println("Average Turnaround Time: " + averageTurnaroundTime);
-		System.out.println("Average Response Time: " + averageResponseTime + "\n");
+		System.out.println("Total Elapsed Time (For the Scheduler): " + totalElapsedTime + "ms");
+		System.out.printf("Throughput: %.2f%n", throughput);
+		System.out.printf("CPU Utilization: %.2f%%\n", CPUutilization);
+		System.out.printf("Average Waiting Time: %.2f\n", averageWaitTime);
+		System.out.printf("Average Turnaround Time: %.2f\n", averageTurnaroundTime);
+		System.out.printf("Average Response Time: %.2f\n\n", averageResponseTime);
 
 	}
 	
 	
-public static void SJFWOPreemption(PrintWriter outputFile) throws Exception {
+	public static void SJFWOPreemption(PrintWriter outputFile) throws Exception {
 		
 		// declare necessary variables
 		long startElapsedTime = System.currentTimeMillis();
-		int waitTimes[] = new int[numProcesses];  
-		int turnaroundTimes[] = new int[numProcesses];
-		int responseTimes[] = new int[numProcesses];
-		int sumWaitTimes = 0;
-	    int sumTurnaroundTimes = 0;
-	    int sumCPUBurstUnits = 0;
-	    int sumResponseTimes = 0;
-		int tempBurstTotal = 0;
+		double waitTimes[] = new double[numProcesses];  
+		waitTimes[0] = 0;
+		double turnaroundTimes[] = new double[numProcesses];
+		double responseTimes[] = new double[numProcesses];
+		double sumWaitTimes = 0;
+		double sumTurnaroundTimes = 0;
+		double sumCPUBurstUnits = 0;
+		double sumResponseTimes = 0;
+		double tempBurstTotal = 0;
 		double CPUutilization;
 		
 
@@ -155,7 +157,7 @@ public static void SJFWOPreemption(PrintWriter outputFile) throws Exception {
 			tempBurstTotal = tempBurstTotal + CPUBurstUnits[i-1];
 		    	
 		    // Calculate wait time
-		    waitTimes[i] = tempBurstTotal - arrivalTimes[i];  
+		    waitTimes[i] = CPUBurstUnits[i - 1] + waitTimes[i - 1];  
 		    	
 		    // Calculate turnaround time
 		    turnaroundTimes[i] = CPUBurstUnits[i] + waitTimes[i];
@@ -171,10 +173,10 @@ public static void SJFWOPreemption(PrintWriter outputFile) throws Exception {
 		}
 		    
 		// Calculate statistics to be printed   
-		float throughput = sumCPUBurstUnits / numProcesses;
-		float averageWaitTime = sumWaitTimes / numProcesses;
-		float averageTurnaroundTime = sumTurnaroundTimes / numProcesses;
-		float averageResponseTime = sumResponseTimes / numProcesses;
+		double throughput = sumCPUBurstUnits / numProcesses;
+		double averageWaitTime = sumWaitTimes / numProcesses;
+		double averageTurnaroundTime = sumTurnaroundTimes / numProcesses;
+		double averageResponseTime = sumResponseTimes / numProcesses;
 
 		
 		// Calculate elapsed time
@@ -186,108 +188,108 @@ public static void SJFWOPreemption(PrintWriter outputFile) throws Exception {
 		// Calculate CPU utilization
 		CPUutilization = getCPUUtilization();
 		
-		// Print statistics to console
-		outputFile.println("\nOrder Selected: SJF W/O Preemption");
+		// Print statistics to ResultsLog.txt
+		outputFile.println("\nOrder Selected: FIFO");
 		outputFile.println("Statistics for the Run\n");
 		
 		outputFile.println("Number of Processes: " + numProcesses);
 		outputFile.println("Total Elapsed Time (For the Scheduler): " + totalElapsedTime + "ms");
-		outputFile.println("Throughput: " + throughput);
-		outputFile.println("CPU Utilization: " + CPUutilization + "%");
-		outputFile.println("Average Waiting Time: " + averageWaitTime);
-		outputFile.println("Average Turnaround Time: " + averageTurnaroundTime);
-		outputFile.println("Average Response Time: " + averageResponseTime + "\n");
+		outputFile.printf("Throughput: %.2f%n", throughput);
+		outputFile.printf("CPU Utilization: %.2f%%\n", CPUutilization);
+		outputFile.printf("Average Waiting Time: %.2f\n", averageWaitTime);
+		outputFile.printf("Average Turnaround Time: %.2f\n", averageTurnaroundTime);
+		outputFile.printf("Average Response Time: %.2f\n\n", averageResponseTime);
 		
-		// Print statistics to ResultsLog.txt
-		System.out.println("\nOrder Selected: SJF W/O Preemption");
+		// Print statistics to console
+		System.out.println("\nOrder Selected: FIFO");
 		System.out.println("Statistics for the Run\n");
 		
 		System.out.println("Number of Processes: " + numProcesses);
 		System.out.println("Total Elapsed Time (For the Scheduler): " + (endElapsedTime - startElapsedTime) + "ms");
-		System.out.println("Throughput: " + throughput);
-		System.out.println("CPU Utilization: " + CPUutilization + "%");
-		System.out.println("Average Waiting Time: " + averageWaitTime);
-		System.out.println("Average Turnaround Time: " + averageTurnaroundTime);
-		System.out.println("Average Response Time: " + averageResponseTime + "\n");
+		System.out.printf("Throughput: %.2f%n", throughput);
+		System.out.printf("CPU Utilization: %.2f%%\n", CPUutilization);
+		System.out.printf("Average Waiting Time: %.2f\n", averageWaitTime);
+		System.out.printf("Average Turnaround Time: %.2f\n", averageTurnaroundTime);
+		System.out.printf("Average Response Time: %.2f\n\n", averageResponseTime);
 
 	}
 	
-	
-public static void priorityWPreemption(PrintWriter outputFile) throws Exception {
-	
-	// declare necessary variables
-	long startElapsedTime = System.currentTimeMillis();
-	int waitTimes[] = new int[numProcesses];  
-	int turnaroundTimes[] = new int[numProcesses];
-	int responseTimes[] = new int[numProcesses];
-	int sumWaitTimes = 0;
-    int sumTurnaroundTimes = 0;
-    int sumCPUBurstUnits = 0;
-    int sumResponseTimes = 0;
-	int tempBurstTotal = 0;
-	double CPUutilization;
-	
+	public static void priorityWPreemption(PrintWriter outputFile) throws Exception {
+		
+		// declare necessary variables
+		long startElapsedTime = System.currentTimeMillis();
+		double waitTimes[] = new double[numProcesses];  
+		waitTimes[0] = 0;
+		double turnaroundTimes[] = new double[numProcesses];
+		double responseTimes[] = new double[numProcesses];
+		double sumWaitTimes = 0;
+		double sumTurnaroundTimes = 0;
+		double sumCPUBurstUnits = 0;
+		double sumResponseTimes = 0;
+		double tempBurstTotal = 0;
+		double CPUutilization;
+		
 
-	for (int i = 1; i < numProcesses; i++) {
-		tempBurstTotal = tempBurstTotal + CPUBurstUnits[i-1];
-	    	
-	    // Calculate wait time
-	    waitTimes[i] = tempBurstTotal - arrivalTimes[i];  
-	    	
-	    // Calculate turnaround time
-	    turnaroundTimes[i] = CPUBurstUnits[i] + waitTimes[i];
-	    	
-	    // Calculate response time
-	    responseTimes[i] = tempBurstTotal - arrivalTimes[i];
-	    
-	    // Calculate sum for burst units, wait times, turnaround times, and response times
-	    sumCPUBurstUnits = sumCPUBurstUnits + CPUBurstUnits[i];
-	    sumWaitTimes = sumWaitTimes + waitTimes[i];  
-	    sumTurnaroundTimes = sumTurnaroundTimes + turnaroundTimes[i]; 
-	    sumResponseTimes = sumResponseTimes + responseTimes[i];
+		for (int i = 1; i < numProcesses; i++) {
+			tempBurstTotal = tempBurstTotal + CPUBurstUnits[i-1];
+		    	
+		    // Calculate wait time
+		    waitTimes[i] = CPUBurstUnits[i - 1] + waitTimes[i - 1];  
+		    	
+		    // Calculate turnaround time
+		    turnaroundTimes[i] = CPUBurstUnits[i] + waitTimes[i];
+		    	
+		    // Calculate response time
+		    responseTimes[i] = tempBurstTotal - arrivalTimes[i];
+		    
+		    // Calculate sum for burst units, wait times, turnaround times, and response times
+		    sumCPUBurstUnits = sumCPUBurstUnits + CPUBurstUnits[i];
+		    sumWaitTimes = sumWaitTimes + waitTimes[i];  
+		    sumTurnaroundTimes = sumTurnaroundTimes + turnaroundTimes[i]; 
+		    sumResponseTimes = sumResponseTimes + responseTimes[i];
+		}
+		    
+		// Calculate statistics to be printed   
+		double throughput = sumCPUBurstUnits / numProcesses;
+		double averageWaitTime = sumWaitTimes / numProcesses;
+		double averageTurnaroundTime = sumTurnaroundTimes / numProcesses;
+		double averageResponseTime = sumResponseTimes / numProcesses;
+
+		
+		// Calculate elapsed time
+		Thread.sleep(1);
+		long endElapsedTime = System.currentTimeMillis();
+		double totalElapsedTime = (endElapsedTime - startElapsedTime) - 1;
+		
+		
+		// Calculate CPU utilization
+		CPUutilization = getCPUUtilization();
+		
+		// Print statistics to ResultsLog.txt
+		outputFile.println("\nOrder Selected: FIFO");
+		outputFile.println("Statistics for the Run\n");
+		
+		outputFile.println("Number of Processes: " + numProcesses);
+		outputFile.println("Total Elapsed Time (For the Scheduler): " + totalElapsedTime + "ms");
+		outputFile.printf("Throughput: %.2f%n", throughput);
+		outputFile.printf("CPU Utilization: %.2f%%\n", CPUutilization);
+		outputFile.printf("Average Waiting Time: %.2f\n", averageWaitTime);
+		outputFile.printf("Average Turnaround Time: %.2f\n", averageTurnaroundTime);
+		outputFile.printf("Average Response Time: %.2f\n\n", averageResponseTime);
+		
+		// Print statistics to console
+		System.out.println("\nOrder Selected: FIFO");
+		System.out.println("Statistics for the Run\n");
+		
+		System.out.println("Number of Processes: " + numProcesses);
+		System.out.println("Total Elapsed Time (For the Scheduler): " + (endElapsedTime - startElapsedTime) + "ms");
+		System.out.printf("Throughput: %.2f%n", throughput);
+		System.out.printf("CPU Utilization: %.2f%%\n", CPUutilization);
+		System.out.printf("Average Waiting Time: %.2f\n", averageWaitTime);
+		System.out.printf("Average Turnaround Time: %.2f\n", averageTurnaroundTime);
+		System.out.printf("Average Response Time: %.2f\n\n", averageResponseTime);
+
 	}
-	    
-	// Calculate statistics to be printed   
-	float throughput = sumCPUBurstUnits / numProcesses;
-	float averageWaitTime = sumWaitTimes / numProcesses;
-	float averageTurnaroundTime = sumTurnaroundTimes / numProcesses;
-	float averageResponseTime = sumResponseTimes / numProcesses;
-
-	
-	// Calculate elapsed time
-	Thread.sleep(1);
-	long endElapsedTime = System.currentTimeMillis();
-	double totalElapsedTime = (endElapsedTime - startElapsedTime) - 1;
-	
-	
-	// Calculate CPU utilization
-	CPUutilization = getCPUUtilization();
-	
-	// Print statistics to console
-	outputFile.println("\nOrder Selected: Priority W/ Preemption");
-	outputFile.println("Statistics for the Run\n");
-	
-	outputFile.println("Number of Processes: " + numProcesses);
-	outputFile.println("Total Elapsed Time (For the Scheduler): " + totalElapsedTime + "ms");
-	outputFile.println("Throughput: " + throughput);
-	outputFile.println("CPU Utilization: " + CPUutilization + "%");
-	outputFile.println("Average Waiting Time: " + averageWaitTime);
-	outputFile.println("Average Turnaround Time: " + averageTurnaroundTime);
-	outputFile.println("Average Response Time: " + averageResponseTime + "\n");
-	
-	// Print statistics to ResultsLog.txt
-	System.out.println("\nOrder Selected: Priority W/ Preemption");
-	System.out.println("Statistics for the Run\n");
-	
-	System.out.println("Number of Processes: " + numProcesses);
-	System.out.println("Total Elapsed Time (For the Scheduler): " + (endElapsedTime - startElapsedTime) + "ms");
-	System.out.println("Throughput: " + throughput);
-	System.out.println("CPU Utilization: " + CPUutilization + "%");
-	System.out.println("Average Waiting Time: " + averageWaitTime);
-	System.out.println("Average Turnaround Time: " + averageTurnaroundTime);
-	System.out.println("Average Response Time: " + averageResponseTime + "\n");
-
-}
 	
 	
 	public static void displayMenu(FileInputStream inputFile, PrintWriter outputFile) throws Exception{
