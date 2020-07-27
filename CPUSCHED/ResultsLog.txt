@@ -1,0 +1,42 @@
+RESULTS LOG
+
+Order Selected: FIFO
+Statistics for the Run
+
+Number of Processes: 10000
+Total Elapsed Time (For the Scheduler): 10.0ms
+Throughput: 15.58
+CPU Utilization: 23.37%
+Average Waiting Time: 77596.90
+Average Turnaround Time: 77612.48
+Average Response Time: 77546.97
+
+
+Order Selected: SJF W/O Preemption
+Statistics for the Run
+
+Number of Processes: 10000
+Total Elapsed Time (For the Scheduler): 7.0ms
+Throughput: 15.58
+CPU Utilization: 1.99%
+Average Waiting Time: 77596.90
+Average Turnaround Time: 77612.48
+Average Response Time: 77546.97
+
+
+Order Selected: Priority W/ Preemption
+Statistics for the Run
+
+Number of Processes: 10000
+Total Elapsed Time (For the Scheduler): 11.0ms
+Throughput: 15.58
+CPU Utilization: 3.57%
+Average Waiting Time: 77596.90
+Average Turnaround Time: 77612.48
+Average Response Time: 77546.97
+
+
+Order Selected: Sixty-Six
+
+Good Soldiers Follow Orders...
+Program Terminated

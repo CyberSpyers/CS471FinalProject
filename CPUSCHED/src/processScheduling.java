@@ -1,5 +1,5 @@
 // Megan Spiers
-// Last Edited: 07/22/2020
+// Last Edited: 07/27/2020
 // Main File for CS471Project
 
 
@@ -189,7 +189,7 @@ public class processScheduling {
 		CPUutilization = getCPUUtilization();
 		
 		// Print statistics to ResultsLog.txt
-		outputFile.println("\nOrder Selected: FIFO");
+		outputFile.println("\nOrder Selected: SJF W/O Preemption");
 		outputFile.println("Statistics for the Run\n");
 		
 		outputFile.println("Number of Processes: " + numProcesses);
@@ -201,7 +201,7 @@ public class processScheduling {
 		outputFile.printf("Average Response Time: %.2f\n\n", averageResponseTime);
 		
 		// Print statistics to console
-		System.out.println("\nOrder Selected: FIFO");
+		System.out.println("\nOrder Selected: SJF W/O Preemption");
 		System.out.println("Statistics for the Run\n");
 		
 		System.out.println("Number of Processes: " + numProcesses);
@@ -266,7 +266,7 @@ public class processScheduling {
 		CPUutilization = getCPUUtilization();
 		
 		// Print statistics to ResultsLog.txt
-		outputFile.println("\nOrder Selected: FIFO");
+		outputFile.println("\nOrder Selected: Priority W/ Preemption");
 		outputFile.println("Statistics for the Run\n");
 		
 		outputFile.println("Number of Processes: " + numProcesses);
@@ -278,7 +278,7 @@ public class processScheduling {
 		outputFile.printf("Average Response Time: %.2f\n\n", averageResponseTime);
 		
 		// Print statistics to console
-		System.out.println("\nOrder Selected: FIFO");
+		System.out.println("\nOrder Selected: Priority W/ Preemption");
 		System.out.println("Statistics for the Run\n");
 		
 		System.out.println("Number of Processes: " + numProcesses);
