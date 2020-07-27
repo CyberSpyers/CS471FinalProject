@@ -101,6 +101,7 @@ public class processScheduling {
 		    sumResponseTimes = sumResponseTimes + responseTimes[i];
 		}
 		    
+		
 		// Calculate statistics to be printed   
 		double throughput = sumCPUBurstUnits / numProcesses;
 		double averageWaitTime = sumWaitTimes / numProcesses;
@@ -150,11 +151,15 @@ public class processScheduling {
 	 */
 	public static void SJFWOPreemption(String orderSelected, PrintWriter outputFile) throws Exception {
 		
+		
+		// Create temporary arrays to store the values of the original arrays
 		int[] temparr1 = new int[processIDs.length];
         int[] temparr2 = new int[priorities.length];
         int[] temparr3 = new int[arrivalTimes.length];
         int[] temparr4 = new int[CPUBurstUnits.length];
         
+        
+        // Populate temporary arrays
         for (int i=0; i<processIDs.length; i++) { 
             temparr1[i] = processIDs[i]; 
         	temparr2[i] = priorities[i];
@@ -163,11 +168,15 @@ public class processScheduling {
         }
         
 
-        bubbleSort(CPUBurstUnits, processIDs,arrivalTimes, priorities);
+        // Call method to sort arrays
+        sortByBase(CPUBurstUnits, processIDs,arrivalTimes, priorities);
         
        
+        // Call FIFO to calculate statistics for sorted arrays
         FIFO(orderSelected, outputFile);
         
+        
+        // Populate arrays back with their original values
         for (int i=0; i<processIDs.length; i++) { 
             processIDs[i] = temparr1[i]; 
             priorities[i] = temparr2[i]; 
@@ -184,12 +193,14 @@ public class processScheduling {
 	 */
 	public static void priorityWPreemption(String orderSelected, PrintWriter outputFile) throws Exception {
 		
-		
+		// Create temporary arrays to store the values of the original arrays
         int[] temparr1 = new int[processIDs.length];
         int[] temparr2 = new int[priorities.length];
         int[] temparr3 = new int[arrivalTimes.length];
         int[] temparr4 = new int[CPUBurstUnits.length];
         
+        
+        // Populate temporary arrays
         for (int i=0; i<processIDs.length; i++) { 
             temparr1[i] = processIDs[i]; 
         	temparr2[i] = priorities[i];
@@ -198,11 +209,14 @@ public class processScheduling {
         }
         
 
-        bubbleSort(priorities,processIDs,arrivalTimes,CPUBurstUnits);
+        // Call method to sort arrays
+        sortByBase(priorities,processIDs,arrivalTimes,CPUBurstUnits);
         
-       
+        // Call FIFO to calculate statistics for sorted arrays
         FIFO(orderSelected, outputFile);
         
+        
+     // Populate arrays back with their original values
         for (int i=0; i<processIDs.length; i++) { 
             processIDs[i] = temparr1[i]; 
             priorities[i] = temparr2[i]; 
@@ -212,16 +226,25 @@ public class processScheduling {
 	}
 	
 	
-	// This method sort the arrays b, c, and d in the index order of sorted array a
-    public static void bubbleSort(int[] a, int[] b, int[] c, int[] d) {
+	// This method sort the arrays sorted1, sorted2, and sorted3 in the index order of sorted array base
+    public static void sortByBase(int[] base, int[] sorted1, int[] sorted2, int[] sorted3) {
 
-        for(int i=0; i<a.length; i++){
-            for(int j=0; j<a.length-i-1;j++){
-                if(a[j]>a[j+1]){
-                    int t = a[j]; a[j]=a[j+1];a[j+1]=t;
-                    t = b[j]; b[j]=b[j+1];b[j+1]=t;
-                     t = c[j]; c[j]=c[j+1];c[j+1]=t;
-                    t = d[j]; d[j]=d[j+1];d[j+1]=t;
+    	// Reorder arrays according to array base
+        for (int i = 0; i < base.length; i++) {
+            for (int j = 0; j < base.length - i - 1;j++) {
+                if (base[j] > base[j + 1] ) {
+                    int temp = base[j]; 
+                    base[j] = base[j+1];
+                    base[j+1] = temp;
+                    temp = sorted1[j]; 
+                    sorted1[j] = sorted1[j + 1];
+                    sorted1[j + 1] = temp;
+                     temp = sorted2[j]; 
+                     sorted2[j] = sorted2[j + 1];
+                     sorted2[j + 1] = temp;
+                    temp = sorted3[j]; 
+                    sorted3[j] = sorted3[j + 1];
+                    sorted3[j + 1] = temp;
                 }
             }
         }
@@ -232,6 +255,7 @@ public class processScheduling {
     // This method serves as a main menu for the code
 	public static void displayMenu(FileInputStream inputFile, PrintWriter outputFile) throws Exception{
 		
+
         Scanner scnrInput = new Scanner(System.in);
         readFile(inputFile);
         String orderSelected = "";
@@ -239,6 +263,7 @@ public class processScheduling {
         
         System.out.println("Initial Note: Results Are Also Logged in the ResultsLog.txt File\n");
         outputFile.println("RESULTS LOG");
+
         
         while(true) {
         	
