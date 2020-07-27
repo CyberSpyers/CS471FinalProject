@@ -6,7 +6,7 @@ Statistics for the Run
 Number of Processes: 10000
 Total Elapsed Time (For the Scheduler): 10.0ms
 Throughput: 15.58
-CPU Utilization: 23.37%
+CPU Utilization: 19.52%
 Average Waiting Time: 77596.90
 Average Turnaround Time: 77612.48
 Average Response Time: 77546.97
@@ -16,24 +16,24 @@ Order Selected: SJF W/O Preemption
 Statistics for the Run
 
 Number of Processes: 10000
-Total Elapsed Time (For the Scheduler): 7.0ms
+Total Elapsed Time (For the Scheduler): 12.0ms
 Throughput: 15.58
-CPU Utilization: 1.99%
-Average Waiting Time: 77596.90
-Average Turnaround Time: 77612.48
-Average Response Time: 77546.97
+CPU Utilization: 6.61%
+Average Waiting Time: 54639.21
+Average Turnaround Time: 54654.80
+Average Response Time: 54589.29
 
 
 Order Selected: Priority W/ Preemption
 Statistics for the Run
 
 Number of Processes: 10000
-Total Elapsed Time (For the Scheduler): 11.0ms
+Total Elapsed Time (For the Scheduler): 3.0ms
 Throughput: 15.58
-CPU Utilization: 3.57%
-Average Waiting Time: 77596.90
-Average Turnaround Time: 77612.48
-Average Response Time: 77546.97
+CPU Utilization: 3.28%
+Average Waiting Time: 78029.81
+Average Turnaround Time: 78045.39
+Average Response Time: 77979.87
 
 
 Order Selected: Sixty-Six
