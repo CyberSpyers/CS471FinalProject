@@ -4,96 +4,36 @@ Order Selected: FIFO
 Statistics for the Run
 
 Number of Processes: 10000
-Total Elapsed Time (For the Scheduler): 5.0ms
-Throughput: 15.58
+Total Elapsed Time (For the Scheduler): 10.0ms
+Throughput: 15.50
 CPU Utilization: 39.07%
-Average Waiting Time: 77596.90
-Average Turnaround Time: 77612.48
-Average Response Time: 77546.97
+Average Waiting Time: 77202.64
+Average Turnaround Time: 77218.13
+Average Response Time: 77152.80
 
 
 Order Selected: SJF W/O Preemption
 Statistics for the Run
 
 Number of Processes: 10000
-Total Elapsed Time (For the Scheduler): 13.0ms
-Throughput: 15.58
-CPU Utilization: 1.49%
-Average Waiting Time: 54639.21
-Average Turnaround Time: 54654.80
-Average Response Time: 54589.29
+Total Elapsed Time (For the Scheduler): 9.0ms
+Throughput: 15.50
+CPU Utilization: 2.40%
+Average Waiting Time: 54183.38
+Average Turnaround Time: 54198.88
+Average Response Time: 54133.54
 
 
 Order Selected: Priority W/ Preemption
-Statistics for the Run
-
-Number of Processes: 10000
-Total Elapsed Time (For the Scheduler): 5.0ms
-Throughput: 15.58
-CPU Utilization: 1.92%
-Average Waiting Time: 78029.81
-Average Turnaround Time: 78045.39
-Average Response Time: 77979.87
-
-
-Order Selected: SJF W/O Preemption
-Statistics for the Run
-
-Number of Processes: 10000
-Total Elapsed Time (For the Scheduler): 4.0ms
-Throughput: 15.58
-CPU Utilization: 6.22%
-Average Waiting Time: 54639.21
-Average Turnaround Time: 54654.80
-Average Response Time: 54589.29
-
-
-Order Selected: FIFO
-Statistics for the Run
-
-Number of Processes: 10000
-Total Elapsed Time (For the Scheduler): 5.0ms
-Throughput: 15.58
-CPU Utilization: 0.00%
-Average Waiting Time: 77596.90
-Average Turnaround Time: 77612.48
-Average Response Time: 77546.97
-
-
-Order Selected: FIFO
 Statistics for the Run
 
 Number of Processes: 10000
 Total Elapsed Time (For the Scheduler): 7.0ms
-Throughput: 15.58
-CPU Utilization: 0.25%
-Average Waiting Time: 77596.90
-Average Turnaround Time: 77612.48
-Average Response Time: 77546.97
-
-
-Order Selected: SJF W/O Preemption
-Statistics for the Run
-
-Number of Processes: 10000
-Total Elapsed Time (For the Scheduler): 8.0ms
-Throughput: 15.58
-CPU Utilization: 3.32%
-Average Waiting Time: 54639.21
-Average Turnaround Time: 54654.80
-Average Response Time: 54589.29
-
-
-Order Selected: Priority W/ Preemption
-Statistics for the Run
-
-Number of Processes: 10000
-Total Elapsed Time (For the Scheduler): 4.0ms
-Throughput: 15.58
-CPU Utilization: 2.32%
-Average Waiting Time: 78029.81
-Average Turnaround Time: 78045.39
-Average Response Time: 77979.87
+Throughput: 15.50
+CPU Utilization: 4.27%
+Average Waiting Time: 77536.58
+Average Turnaround Time: 77552.08
+Average Response Time: 77486.74
 
 
 Order Selected: Sixty-Six
