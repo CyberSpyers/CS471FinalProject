@@ -5,7 +5,7 @@
 </br>
 1. Navigate to CS471Project/CPUSCHED/src Folder </br>
 2. Open and Run RandomInputGenerator.java file; </br>
-&nbsp;&nbsp;&nbsp;output will be saved as RandomInput.txt and will be different for each run </br>
+&nbsp;&nbsp;&nbsp; output will be saved as RandomInput.txt and will be different for each run </br>
 3. Open and Run processScheduling.java file </br>
 4. When presented with menu below: </br>
 
