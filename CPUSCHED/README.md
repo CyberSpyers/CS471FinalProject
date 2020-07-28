@@ -23,4 +23,4 @@
 &nbsp;&nbsp;&nbsp; Select the order you would like to see by typing 1, 2, 3, or exiting with 4 </br>
 5. Statistics for the run will be printed to console and also logged in ResultsLog.txt File </br>
 6. To run with different data, run RandomInputGenerator.java file again </br>
-6. Type 4 when ready to exit program
+7. Type 4 when ready to exit program
