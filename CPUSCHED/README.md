@@ -1,7 +1,9 @@
 ### Part 1 Instructions ###
 
 #### Input File: RandomInput.txt ####
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sample Input File Included; Instructions below will generate new file </br>
 #### Output File: ResultsLog.txt ####
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sample Output File Included; Instructions below will generate new file </br>
 </br>
 1. Navigate to CS471Project/CPUSCHED/src Folder </br>
 2. Open and Run RandomInputGenerator.java file; </br>
