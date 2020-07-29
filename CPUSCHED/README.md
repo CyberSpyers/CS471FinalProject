@@ -1,5 +1,7 @@
 ### Part 1 Instructions ###
 
+##### Note: I imported to GitHub from Eclipse; therefore, those settings are present here in the directory, too #####
+
 #### Input File: RandomInput.txt ####
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sample Input File Included; Instructions below will generate new file </br>
 #### Output File: ResultsLog.txt ####
