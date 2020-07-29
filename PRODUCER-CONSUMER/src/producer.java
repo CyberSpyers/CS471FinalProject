@@ -2,11 +2,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class producer extends Thread {
 
-	ProducerConsumer bank;
+	ProducerConsumer items;
 
-	public producer(ProducerConsumer bank) {
+	public producer(ProducerConsumer items) {
 
-		this.bank = bank;
+		this.items = items;
 
 	}
 	
@@ -21,12 +21,10 @@ public class producer extends Thread {
 		try {
 			while(true) {
 	
-				double randomNum = Math.random() * 100 + 1;
-	
-				int random = (int) randomNum;
+				
 	
 				// Add random amount of food from 1-100
-				bank.giveFood(random);
+				items.insertItem();
 				
 				
 				/*******************************************/

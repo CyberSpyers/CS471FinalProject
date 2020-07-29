@@ -1,41 +1,76 @@
+import java.util.Scanner;
+
 
 public class ProducerConsumerPatrons {
-	// Ah, main methods.. I know how to work these
+	
 		public static void main(String[] args) {
+			
+			Scanner scnr = new Scanner(System.in);
+			Boolean flag = true;
+			while (flag) {
+				try {	
+					System.out.println("Enter only a postive integer for each prompt as it appears below");
+					System.out.print("Enter the desired # of producer threads: ");
+					String numProducers = scnr.nextLine();
+					System.out.print("Enter the desired # of consumer threads: ");
+					String numConsumers = scnr.nextLine();
+					System.out.print("Enter the desired sleep time: ");
+					String sleepTime = scnr.nextLine();
+					if (Integer.parseInt(numProducers) > 0) {
+					
+						if (Integer.parseInt(numConsumers) > 0) {
+							
+							if (Integer.parseInt(sleepTime) > 0) {
+								
+								flag = false;
+								System.out.println();
+							
+							}
+						
+						}
+						
+					}
+					else {
+						System.out.println("Enter only a postive integer for each prompt");
+					}
+					
+				}
+				catch (Exception e) {
+					System.out.println("Enter only a postive integer for each prompt");
+				}
+				
+				finally {
+					System.out.println();
+				}
+			}
+			
+			
+			
+			
+			
+			scnr.close();
+			
 
-			ProducerConsumer foodBank = new ProducerConsumer();
+			ProducerConsumer itemBank = new ProducerConsumer();
 
-			producer foodProducer = new producer(foodBank);
+			producer itemProducer = new producer(itemBank);
 			
 			
-			/*********************************************************/
-			/* Created Multiple Consumers to Ensure It Works.        */
-			/* I noticed that the more consumers I add, the greater  */
-			/* sleep time I had to give to allow messages to display */
-			/* correctly. The food bank remained correct without     */
-			/* extending time; however, the messages would display   */
-			/* slighty out of order at times.                        */
-			/*********************************************************/
 
-			consumer foodConsumer = new consumer(foodBank);
+			consumer itemConsumer = new consumer(itemBank);
 			
-			consumer foodConsumer2 = new consumer(foodBank);
+			consumer itemConsumer2 = new consumer(itemBank);
 			
-			consumer foodConsumer3 = new consumer(foodBank);
-			
-			
-			//This was for my testing purposes
-			//System.out.println("Starting Program");
-			
-			foodProducer.start();
+			consumer itemConsumer3 = new consumer(itemBank);
 			
 			
-			/*****************************************************/
-			/* I don't know if this Thread.sleep() is supposed   */
-			/* to be here or not, but when I remove it, it seems */
-			/* that sometimes the threads get all jacked up      */
-			/* and obviously, I don't want that to happen        */
-			/*****************************************************/
+			
+			
+			
+			itemProducer.start();
+			
+			
+			
 
 			try {
 				Thread.sleep(1);
@@ -44,7 +79,7 @@ public class ProducerConsumerPatrons {
 				Thread.currentThread().interrupt();
 			}
 			
-			foodConsumer.start();
+			itemConsumer.start();
 			
 			try {
 				Thread.sleep(1);
@@ -53,7 +88,7 @@ public class ProducerConsumerPatrons {
 				Thread.currentThread().interrupt();
 			}
 			
-			foodConsumer2.start();
+			itemConsumer2.start();
 			
 			try {
 				Thread.sleep(1);
@@ -62,7 +97,7 @@ public class ProducerConsumerPatrons {
 				Thread.currentThread().interrupt();
 			}
 			
-			foodConsumer3.start();
+			itemConsumer3.start();
 
 
 		}

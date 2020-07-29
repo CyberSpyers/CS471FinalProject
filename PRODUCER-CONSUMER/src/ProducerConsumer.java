@@ -1,21 +1,20 @@
-// Based on FoodBank.java
 
 public class ProducerConsumer { 
 	
-	int food; 
+	int items; 
 	
 	public ProducerConsumer() { 
-		food = 0; 
+		items = 0; 
 	} 
 	
-	public void giveFood(int numToAdd) { 
-		food = food + numToAdd; 
-		System.out.println("Adding " + numToAdd + " items of food, the balance is now " + food + " items.");
+	public void insertItem() { 
+		items = items + 1; 
+		System.out.println("Adding 1 item to items, the balance is now " + items + " items.");
 	} 
 	
-	public void takeFood(int numToSubtract) {
-		food = food - numToSubtract; 
-		System.out.println("Taking " + numToSubtract + " items of food, the balance is now " + food + " items."); 
+	public void removeItem() {
+		items = items - 1; 
+		System.out.println("Taking 1 item from items, the balance is now " + items + " items."); 
 	}
 	
 }

@@ -1,6 +1,0 @@
-RESULTS LOG
-
-Order Selected: Sixty-Six
-
-Good Soldiers Follow Orders...
-Program Terminated

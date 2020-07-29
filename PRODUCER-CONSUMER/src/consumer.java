@@ -2,11 +2,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class consumer extends Thread{ 
 	
-	ProducerConsumer bank; 
+	ProducerConsumer items; 
 	
-	public consumer(ProducerConsumer bank) { 
+	public consumer(ProducerConsumer items) { 
 		
-		this.bank = bank; 
+		this.items = items; 
 		
 	} 
 	
@@ -22,18 +22,17 @@ public class consumer extends Thread{
 		try {
 		
 			while(true){ 
-				double randomDouble =Math.random() * 100 + 1; 
-				int random = (int) randomDouble; 
+				
 				
 				// If food bank is empty, wait until its not
-				if(bank.food < 0) {
+				if(items.items < 0) {
 					
 					try {
 						wait();
 					} catch (InterruptedException e) {
 						
 					}
-					System.out.println("Waiting to get food.");
+					System.out.println("Waiting to get items.");
 				}
 					
 				else {
@@ -46,9 +45,9 @@ public class consumer extends Thread{
 					}
 					
 					// If there's enough food in the bank to take away the desired amount, do so
-					if(bank.food >= random){ 
+					if(items.items >= 1){ 
 						
-						bank.takeFood(random); 
+						items.removeItem(); 
 						try {
 							Thread.sleep(500); // I had to change this to a higher number to ensure my threads didn't get out of whack
 						}
@@ -58,7 +57,7 @@ public class consumer extends Thread{
 					}
 					else{ 
 						// If there's not enough to take away the desired amount, state the problem
-						System.out.println("Not enough food to take " + random + " items. Current balance is " + bank.food + " items."); 
+						System.out.println("Not enough items to take an item. Current balance is " + items.items + " items."); 
 						try {
 							Thread.sleep(100);
 						}
