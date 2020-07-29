@@ -3,33 +3,38 @@ import java.util.Scanner;
 
 public class ProducerConsumerPatrons {
 	
-		public static void main(String[] args) {
+		public static int sleepTime;
+
+		public static void main(String[] args) throws InterruptedException {
 			
 			Scanner scnr = new Scanner(System.in);
 			Boolean flag = true;
+			int numProducers = 0;
+			int numConsumers = 0;
+			
+			
+			System.out.println("Enter only a postive integer for each prompt as it appears below");
+			
 			while (flag) {
 				try {	
-					System.out.println("Enter only a postive integer for each prompt as it appears below");
+			
 					System.out.print("Enter the desired # of producer threads: ");
-					String numProducers = scnr.nextLine();
+					String numProducersString = scnr.nextLine();
+					numProducers = Integer.parseInt(numProducersString);
 					System.out.print("Enter the desired # of consumer threads: ");
-					String numConsumers = scnr.nextLine();
+					String numConsumersString = scnr.nextLine();
+					numConsumers = Integer.parseInt(numConsumersString);
 					System.out.print("Enter the desired sleep time: ");
-					String sleepTime = scnr.nextLine();
-					if (Integer.parseInt(numProducers) > 0) {
+					String sleepTimeString = scnr.nextLine();
+					sleepTime = Integer.parseInt(sleepTimeString);
+					if ((numProducers > 0) && (numConsumers > 0)
+							&& (sleepTime >= 0)) {
 					
-						if (Integer.parseInt(numConsumers) > 0) {
-							
-							if (Integer.parseInt(sleepTime) > 0) {
-								
-								flag = false;
-								System.out.println();
-							
-							}
-						
-						}
+						flag = false;
+						System.out.println();
 						
 					}
+					
 					else {
 						System.out.println("Enter only a postive integer for each prompt");
 					}
@@ -48,57 +53,42 @@ public class ProducerConsumerPatrons {
 			
 			
 			
-			scnr.close();
 			
+			producer[] producerThreads = new producer[numProducers];
+			consumer[] consumerThreads = new consumer[numConsumers];
 
 			ProducerConsumer itemBank = new ProducerConsumer();
 
-			producer itemProducer = new producer(itemBank);
+			for (int i = 0; i < numProducers; i++) {
+				producerThreads[i] = new producer(itemBank);
+				producerThreads[i].start();
+				
+			}
+			
+			for (int i = 0; i < numConsumers; i++) {
+				consumerThreads[i] = new consumer(itemBank);
+				consumerThreads[i].start();
+			}
+		
+			for (producer thread : producerThreads) {
+				thread.join();
+			}
+			
+			for (consumer thread : consumerThreads) {
+				thread.join();
+			}
+			
 			
 			
 
-			consumer itemConsumer = new consumer(itemBank);
-			
-			consumer itemConsumer2 = new consumer(itemBank);
-			
-			consumer itemConsumer3 = new consumer(itemBank);
 			
 			
 			
 			
-			
-			itemProducer.start();
 			
 			
 			
 
-			try {
-				Thread.sleep(1);
-			}
-			catch(InterruptedException e) {
-				Thread.currentThread().interrupt();
-			}
-			
-			itemConsumer.start();
-			
-			try {
-				Thread.sleep(1);
-			}
-			catch(InterruptedException e) {
-				Thread.currentThread().interrupt();
-			}
-			
-			itemConsumer2.start();
-			
-			try {
-				Thread.sleep(1);
-			}
-			catch(InterruptedException e) {
-				Thread.currentThread().interrupt();
-			}
-			
-			itemConsumer3.start();
-
-
+			scnr.close();
 		}
 }

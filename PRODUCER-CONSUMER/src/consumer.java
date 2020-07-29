@@ -3,6 +3,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class consumer extends Thread{ 
 	
 	ProducerConsumer items; 
+	int sleepTime = ProducerConsumerPatrons.sleepTime;
 	
 	public consumer(ProducerConsumer items) { 
 		
@@ -49,7 +50,7 @@ public class consumer extends Thread{
 						
 						items.removeItem(); 
 						try {
-							Thread.sleep(500); // I had to change this to a higher number to ensure my threads didn't get out of whack
+							Thread.sleep(sleepTime); 
 						}
 						catch(InterruptedException e) {
 							Thread.currentThread().interrupt();
@@ -59,7 +60,7 @@ public class consumer extends Thread{
 						// If there's not enough to take away the desired amount, state the problem
 						System.out.println("Not enough items to take an item. Current balance is " + items.items + " items."); 
 						try {
-							Thread.sleep(100);
+							Thread.sleep(sleepTime);
 						}
 						catch(InterruptedException e) {
 							Thread.currentThread().interrupt();

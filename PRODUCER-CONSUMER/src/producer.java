@@ -3,6 +3,8 @@ import java.util.concurrent.locks.ReentrantLock;
 public class producer extends Thread {
 
 	ProducerConsumer items;
+	
+	int sleepTime = ProducerConsumerPatrons.sleepTime;
 
 	public producer(ProducerConsumer items) {
 
@@ -23,7 +25,7 @@ public class producer extends Thread {
 	
 				
 	
-				// Add random amount of food from 1-100
+				
 				items.insertItem();
 				
 				
@@ -33,7 +35,7 @@ public class producer extends Thread {
 				/* multiple consumers.                     */
 				/*******************************************/
 				try {
-					Thread.sleep(700);
+					Thread.sleep(sleepTime);
 				}
 				catch(InterruptedException e) {
 					Thread.currentThread().interrupt();
