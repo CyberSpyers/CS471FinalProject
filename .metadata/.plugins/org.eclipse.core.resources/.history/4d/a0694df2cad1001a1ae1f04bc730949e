@@ -21,14 +21,14 @@ public class ProducerConsumerPatrons {
 					System.out.print("Enter the desired # of producer threads: ");
 					String numProducersString = scnr.nextLine();
 					numProducers = Integer.parseInt(numProducersString);
-					System.out.print("Enter the desired # of consumer threads: "); 
+					System.out.print("Enter the desired # of consumer threads: ");
 					String numConsumersString = scnr.nextLine();
 					numConsumers = Integer.parseInt(numConsumersString);
 					System.out.print("Enter the desired sleep time: ");
 					String sleepTimeString = scnr.nextLine();
 					sleepTime = Integer.parseInt(sleepTimeString);
 					if ((numProducers > 0) && (numConsumers > 0)
-							&& (sleepTime >= 0)) {
+							&& (sleepTime > 0)) {
 					
 						flag = false;
 						System.out.println();
@@ -66,17 +66,13 @@ public class ProducerConsumerPatrons {
 			}
 			
 			for (int i = 0; i < numConsumers; i++) {
-				consumerThreads[i] = new consumer(itemBank);
-				consumerThreads[i].start();
+				consumer itemConsumer = new consumer(itemBank);
+				itemConsumer.start();
+				itemConsumer.join();
 			}
 		
-			for (producer thread : producerThreads) {
-				thread.join();
-			}
 			
-			for (consumer thread : consumerThreads) {
-				thread.join();
-			}
+			
 			
 			
 			
