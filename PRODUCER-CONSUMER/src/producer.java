@@ -30,7 +30,7 @@ public class producer extends Thread {
 				
 				
 				
-				try {
+				try { 
 					Thread.sleep(sleepTime);
 				}
 				catch(InterruptedException e) {
