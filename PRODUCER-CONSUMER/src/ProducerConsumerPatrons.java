@@ -23,7 +23,7 @@ public class ProducerConsumerPatrons {
 					numProducers = Integer.parseInt(numProducersString);
 					System.out.print("Enter the desired # of consumer threads: ");
 					String numConsumersString = scnr.nextLine();
-					numConsumers = Integer.parseInt(numConsumersString);
+					numConsumers = Integer.parseInt(numConsumersString); 
 					System.out.print("Enter the desired sleep time: ");
 					String sleepTimeString = scnr.nextLine();
 					sleepTime = Integer.parseInt(sleepTimeString);
