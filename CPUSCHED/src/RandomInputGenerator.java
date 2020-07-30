@@ -24,7 +24,7 @@ public class RandomInputGenerator {
         // Creating a newFile object that represents the file to be created
         PrintStream newFile = new PrintStream(new File("RandomInput.txt")); 
   
-        
+         
         // Store current System.out before assigning a new value 
         PrintStream console = System.out; 
   
