@@ -10,7 +10,7 @@ public class ProducerConsumerPatrons {
 			Scanner scnr = new Scanner(System.in);
 			Boolean flag = true;
 			int numProducers = 0;
-			int numConsumers = 0;
+			int numConsumers = 0;  
 			
 			
 			System.out.println("Enter only a postive integer for each prompt as it appears below");
