@@ -29,11 +29,7 @@ public class producer extends Thread {
 				items.insertItem();
 				
 				
-				/*******************************************/
-				/* I had to change my sleep time to longer */
-				/* or else my messages got jack up using   */
-				/* multiple consumers.                     */
-				/*******************************************/
+				
 				try {
 					Thread.sleep(sleepTime);
 				}

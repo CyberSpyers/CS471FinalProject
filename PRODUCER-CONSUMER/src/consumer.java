@@ -25,7 +25,7 @@ public class consumer extends Thread{
 			while(true){ 
 				
 				
-				// If food bank is empty, wait until its not
+				
 				if(items.items < 0) {
 					
 					try {
@@ -39,13 +39,13 @@ public class consumer extends Thread{
 				else {
 					
 					try{
-						// If food bank is not empty, get it going
+						
 						notify();
 					} catch (IllegalMonitorStateException e) {
 						
 					}
 					
-					// If there's enough food in the bank to take away the desired amount, do so
+					
 					if(items.items >= 1){ 
 						
 						items.removeItem(); 
