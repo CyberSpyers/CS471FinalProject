@@ -1,3 +1,9 @@
+// Megan Spiers
+// Last Edited: 07/30/2020
+// For use with CS471Project Part 2 Files
+
+
+// Import necessary stuff
 import java.util.concurrent.locks.ReentrantLock;
 
 public class consumer extends Thread{ 
@@ -15,10 +21,11 @@ public class consumer extends Thread{
 	ReentrantLock lock = new ReentrantLock();
 	
 	
+	@Override
 	public void run(){
 		
 		// Initial lock
-		lock.lock();
+		this.lock.lock();
 		
 		try {
 		
@@ -26,12 +33,12 @@ public class consumer extends Thread{
 				
 				
 				
-				if(items.items < 0) {
+				if(this.items.items < 0) {
 					
 					try {
 						wait();
 					} catch (InterruptedException e) {
-						
+						//
 					}
 					System.out.println("Waiting to get items.");
 				}
@@ -42,15 +49,15 @@ public class consumer extends Thread{
 						
 						notify();
 					} catch (IllegalMonitorStateException e) {
-						
+						//
 					}
 					
 					
-					if(items.items >= 1){ 
+					if(this.items.items >= 1){ 
 						
-						items.removeItem(); 
+						this.items.removeItem(); 
 						try {
-							Thread.sleep(sleepTime); 
+							Thread.sleep(this.sleepTime); 
 						}
 						catch(InterruptedException e) {
 							Thread.currentThread().interrupt();
@@ -58,9 +65,9 @@ public class consumer extends Thread{
 					}
 					else{ 
 						// If there's not enough to take away the desired amount, state the problem
-						System.out.println("Not enough items to take an item. Current balance is " + items.items + " items."); 
+						System.out.println("Not enough items to take an item. Current balance is " + this.items.items + " items."); 
 						try {
-							Thread.sleep(sleepTime);
+							Thread.sleep(this.sleepTime);
 						}
 						catch(InterruptedException e) {
 							Thread.currentThread().interrupt();
@@ -71,7 +78,7 @@ public class consumer extends Thread{
 			} 
 		} finally {
 			// disable lock
-			lock.unlock();
+			this.lock.unlock();
 		}
 	} 
 }

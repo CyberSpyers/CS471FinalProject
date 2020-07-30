@@ -1,6 +1,6 @@
 // Megan Spiers
 // Last Edited: 07/19/2020
-// For use with CS471Project Files
+// For use with CS471Project Part 1 File processScheduling.java
 
 
 // Necessary import for PrintStream

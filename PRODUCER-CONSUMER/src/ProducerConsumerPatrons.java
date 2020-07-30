@@ -1,3 +1,9 @@
+// Megan Spiers
+// Last Edited: 07/30/2020
+// Main File for CS471Project Part 2
+
+
+// Import Necessary Stuff
 import java.util.Scanner;
 
 
@@ -27,7 +33,7 @@ public class ProducerConsumerPatrons {
 					System.out.print("Enter the desired sleep time: ");
 					String sleepTimeString = scnr.nextLine();
 					sleepTime = Integer.parseInt(sleepTimeString);
-					if ((numProducers > 0) && (numConsumers > 0)
+					if ((numProducers >= 0) && (numConsumers >= 0)
 							&& (sleepTime >= 0)) {
 					
 						flag = false;

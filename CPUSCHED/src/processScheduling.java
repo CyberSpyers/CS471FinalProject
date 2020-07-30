@@ -1,6 +1,6 @@
 // Megan Spiers
-// Last Edited: 07/27/2020
-// Main File for CS471Project
+// Last Edited: 07/30/2020
+// Main File for CS471Project Part 1
 
 
 // Import Necessary Stuff

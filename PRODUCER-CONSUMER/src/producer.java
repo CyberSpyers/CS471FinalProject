@@ -1,3 +1,9 @@
+// Megan Spiers
+// Last Edited: 07/30/2020
+// For use with CS471Project Part 2 Files
+
+
+// Import necessary stuff
 import java.util.concurrent.locks.ReentrantLock;
 
 public class producer extends Thread {
@@ -15,10 +21,11 @@ public class producer extends Thread {
 	// Establish monitor lock
 	ReentrantLock lock = new ReentrantLock();
 
+	@Override
 	public void run(){
 		
 		// Initial lock
-		lock.lock();
+		this.lock.lock();
 
 		try {
 			while(true) {
@@ -26,12 +33,12 @@ public class producer extends Thread {
 				
 	
 				
-				items.insertItem();
+				this.items.insertItem();
 				
 				
 				
 				try { 
-					Thread.sleep(sleepTime);
+					Thread.sleep(this.sleepTime);
 				}
 				catch(InterruptedException e) {
 					Thread.currentThread().interrupt();
@@ -39,7 +46,7 @@ public class producer extends Thread {
 			}
 		} finally {
 			// disable lock
-			lock.unlock();
+			this.lock.unlock();
 		}
 		
 	}
