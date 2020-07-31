@@ -1,18 +1,18 @@
 ### Tabulated Results Table ###
 | Test Case | # Producers | # Consumers | Sleep Time (ms) | Observed Results                                                                                    |
 |-----------|-------------|-------------|-----------------|-----------------------------------------------------------------------------------------------------|
-| 1         | 1           | 1           | 1               | Producers & Consumers Do Not Perform as Expected </br> Balance Not Intact </br> Prints Out of Order |
-| 2         | 1           | 1           | 1000            |                                                                                                     |
-| 3         | 1           | 1           | 5000            |                                                                                                     |
-| 4         | 4           | 1           | 1               |                                                                                                     |
-| 5         | 4           | 1           | 1000            |                                                                                                     |
-| 6         | 4           | 1           | 5000            |                                                                                                     |
-| 7         | 16          | 1           | 1               |                                                                                                     |
-| 8         | 16          | 1           | 1000            |                                                                                                     |
-| 9         | 16          | 1           | 5000            |                                                                                                     |
-| 10        | 1           | 2           | 1               |                                                                                                     |
-| 11        | 1           | 2           | 1000            |                                                                                                     |
-| 12        | 1           | 2           | 5000            |                                                                                                     |
+| 1         | 1           | 1           | 1               | Producers & Consumers Perform as Expected </br> Balance Intact </br> Prints in Correct Order        |
+| 2         | 1           | 1           | 1000            | Producers & Consumers Perform as Expected </br> Balance Intact </br> Prints in Correct Order        |
+| 3         | 1           | 1           | 5000            | Producers & Consumers Perform as Expected </br> Balance Intact </br> Prints in Correct Order        |
+| 4         | 4           | 1           | 1               | Producers & Consumers Perform as Expected </br> Balance Intact </br> Prints in Incorrect Order      |
+| 5         | 4           | 1           | 1000            | Producers & Consumers Perform as Expected </br> Balance Intact </br> Prints in Incorrect Order      |
+| 6         | 4           | 1           | 5000            | Producers & Consumers Perform as Expected </br> Balance Intact </br> Prints in Incorrect Order      |
+| 7         | 16          | 1           | 1               | Producers & Consumers Perform as Expected </br> Balance Not Intact </br> Prints in Incorrect Order  |
+| 8         | 16          | 1           | 1000            | Producers & Consumers Perform as Expected </br> Balance Intact </br> Prints in Incorrect Order      |
+| 9         | 16          | 1           | 5000            | Producers & Consumers Perform as Expected </br> Balance Intact </br> Prints in Correct Order        |
+| 10        | 1           | 2           | 1               | Producers & Consumers Perform as Expected </br> Balance Intact </br> Prints in Correct Order        |
+| 11        | 1           | 2           | 1000            | Producers & Consumers Perform as Expected </br> Balance Intact </br> Prints in Correct Order        |
+| 12        | 1           | 2           | 5000            | Producers & Consumers Perform as Expected </br> Balance Intact </br> Prints in Correct Order        |
 | 13        | 4           | 2           | 1               |                                                                                                     |
 | 14        | 4           | 2           | 1000            |                                                                                                     |
 | 15        | 4           | 2           | 5000            |                                                                                                     |
