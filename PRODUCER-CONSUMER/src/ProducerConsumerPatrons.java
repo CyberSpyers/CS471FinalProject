@@ -4,7 +4,7 @@
 
 
 // Import Necessary Stuff
-import java.util.Scanner;
+import java.util.Scanner; 
 
 
 // This is the file you want to run for part 2
@@ -15,7 +15,7 @@ public class ProducerConsumerPatrons {
 		public static int sleepTime;
 
 		
-		// Declare main method
+		// Declare main method 
 		public static void main(String[] args) throws InterruptedException {
 			
 			

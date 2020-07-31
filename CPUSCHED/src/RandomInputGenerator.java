@@ -9,7 +9,7 @@ import java.io.*;
 
 // Begin Class
 public class RandomInputGenerator { 
-	
+	 
 	
 	// Creates method to return a random integer between the minimum and maximum
 	public static int getRandomInteger(int minimum, int maximum) {

@@ -1,6 +1,6 @@
 ### Part 2 Instructions ###
 
-
+ 
 #### Input File: No Input Files ####
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; All Inputs Handled in Console </br>
 #### Output File: No Output Files ####
