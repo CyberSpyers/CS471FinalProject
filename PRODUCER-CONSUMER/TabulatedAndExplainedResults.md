@@ -37,3 +37,19 @@
 | 34        | 16          | 16          | 1               | Producers & Consumers Perform as Expected </br> Balance Not Intact </br> Prints in Incorrect Order |
 | 35        | 16          | 16          | 1000            | Producers & Consumers Perform as Expected </br> Balance Not Intact </br> Prints in Incorrect Order |
 | 36        | 16          | 16          | 5000            | Producers & Consumers Perform as Expected </br> Balance Intact </br> Prints in Correct Order       |
+
+</br>
+</br>
+
+### Summary ###
+It appears that as sleep time increases, things tend to work correctly. </br>
+Also, unless the # of producers and consumers are close to one another, </br>
+the balance messes up and the print statements come out of order. </br>
+
+</br>
+</br>
+
+### Explanation ###
+When there are way more producers than consumers, the consumers can't </br>
+keep up and vice versa. When there is little sleep time, the print statements </br>
+can come out of order as the threads keep going before the statements print, possibly. 
