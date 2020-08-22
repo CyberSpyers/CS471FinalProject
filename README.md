@@ -55,28 +55,17 @@ Problem 2: Producer-Consumer Problem
 
 This follows the description in pages 253-257of the 9th edition of the textbook. Develop the producer-consumer problem using Pthreads or Winn32APIor using any other library of your preference.You can code the program in any language of your choice.Test the program with several inputs (the three parameters to the main program are shown in the textbook). Definitely, test the following parameters. Try with different sleep times. Measure the performance of the time in terms of overall turnaround time. Tabulate your results along with the parameters used. Finally, summarize your results and give an explanation for the results.
 
-Test case   Number of producers   Number of consumers
-
-1                             1                              1
-
-2                             4                              1
-
-3                            16                             1
-
-4                             1                              2
-
-5                             4                              2
-
-6                            16                             2
-
-7                             1                              4
-
-8                             4                              4
-
-9                            16                             4
-
-10                           1                             16
-
-11                           4                             16
-
-12                          16                             16
+| Test Case | # Producers | # Consumers |
+|-----------|-------------|-------------|
+| 1         | 1           | 1           |
+| 2         | 4           | 1           |
+| 3         | 16          | 1           |
+| 4         | 1           | 2           |
+| 5         | 4           | 2           |
+| 6         | 16          | 2           |
+| 7         | 1           | 4           |
+| 8         | 4           | 4           |
+| 9         | 16          | 4           |
+| 10        | 1           | 16          |
+| 11        | 4           | 16          |
+| 12        | 16          | 16          |
